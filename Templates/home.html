@@ -1,0 +1,66 @@
+{% extends "base.html" %} {% load static %} {% block body %}
+
+<div class="container">
+  <div class="row d-flex justify-content-center align-contex-center">
+    <div class="col-6 my-2">
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur
+        quas sed quod ex necessitatibus. Assumenda, repellendus. Pariatur
+        dolorum eos consequatur tempora saepe nemo ut voluptatum esse molestiae
+        numquam. Est iure iste eaque aspernatur rerum enim sit perferendis
+        eveniet dolorum quia laudantium ipsa, accusamus itaque ratione. Voluptas
+        hic pariatur iusto cum aliquid officia ipsam mollitia? Alias sunt
+        maiores reprehenderit hic ipsum aliquam maxime dolor veniam et, vel,
+        architecto dignissimos in saepe, laborum molestias voluptates! Odit
+        debitis recusandae, consequatur ratione rerum culpa magnam odio aliquam
+        provident hic architecto. Dolor necessitatibus rem culpa sit sint
+        quidem, temporibus consequatur. Eaque dolorum blanditiis id atque quas
+        at tempore hic molestias, sed facere esse ullam odit itaque sunt
+        laboriosam tempora iure nihil autem eius vero beatae animi aliquam!
+        Pariatur, nostrum voluptatem qui, beatae modi fugit libero dolorem,
+        debitis eum quaerat architecto? Sint ab, fugit velit minus sunt rerum,
+        eligendi corporis provident et illo nihil, consequuntur consequatur quae
+        cum vel ipsam esse molestias expedita! Illo perferendis maiores iure
+        beatae eius facere, officiis vel, consectetur neque eos repellendus
+        natus nostrum reprehenderit vero cumque quis! Commodi dolorem, ea
+        distinctio harum aspernatur nesciunt beatae accusantium est itaque
+      </p>
+    </div>
+    <div class="col-6 my-2">
+      <img src="{% static 'car.jpg' %}" alt="Car Sale Banner" />
+    </div>
+  </div>
+  <div class="p-2">
+    {% for brandName in brand%}
+    <a
+      href="{% url 'carbrand_homepage' brandName.slug%}"
+      class="btn btn-success mx-3"
+      >{{brandName}}</a
+    >
+    {%endfor%}
+  </div>
+  <div class="row">
+    <h4 class="p-2">Total Car Found :{{cars|length}}</h4>
+    {% for car in cars %}
+    <div class="col-md-3 mb-4">
+      <div class="card">
+        <img
+          src="{{ car.CarImage.url }}"
+          class="card-img-top"
+          alt="Image of {{ car.Carname }}"
+        />
+        <div class="card-body">
+          <h5 class="card-title">{{ car.Carname }}</h5>
+          <p class="card-text">Price: ${{ car.carPrice }}</p>
+          <p class="card-text">Brand: {{ car.brand.brand_name }}</p>
+          <a href="{% url 'detailcar' car.id %}" class="btn btn-primary"
+            >View Details</a
+          >
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock %}

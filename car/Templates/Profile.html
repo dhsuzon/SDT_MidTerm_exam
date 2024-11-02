@@ -1,0 +1,27 @@
+{% extends "base.html" %} {% block body %}
+{% if messages%}
+{% for ms in messages%}
+  <div class="alert alert-{{ ms.tags}}">
+    {{ ms }}
+  </div>
+{%endfor%}
+{%endif%}
+
+{% if user.is_authenticated %}
+    <a href="{% url 'EditUserData' user.id %}" class="text-decoration-none text-dark btn btn-primary m-5">Edit User Data</a>
+{% endif %}
+
+<div class ="container" >
+    <div class="row d-flex justify-content-center align-items-center m-5 ">
+      <div class="col-6 g-5">
+        <img src="{{car.CarImage.url}}" class="card-img-top" alt="Image of {{ car.Carname }}" />
+      </div>
+      <div class="col-6 g-5">
+        <h5>CarName: {{car.Carname }}</h5>
+        <p>CarPrice: ${{car.carPrice }}</p>
+        <p>CarBrand: {{car.brand.brand_name }}</p>
+        <p>CarDescription: {{car.CarDescription}}</p>
+      </div>
+      </div>
+   </div>
+{% endblock %}

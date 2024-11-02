@@ -1,0 +1,18 @@
+{% extends "base.html" %} {% load crispy_forms_tags %} {% block body %}
+{% if messages%}
+{% for ms in messages%}
+  <div class="alert alert-{{ ms.tags}}">
+    {{ ms }}
+  </div>
+{%endfor%}
+{%endif%}
+<form
+  method="POST"
+  style="width: 50%; margin: auto"
+  class="p-5"
+  novalidate
+>
+  {% csrf_token %} {{ form|crispy}}
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endblock %}

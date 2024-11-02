@@ -1,0 +1,41 @@
+{% extends "base.html" %} {% load crispy_forms_tags %} {% block body %}
+ <div class ="container" >
+  <div class="row d-flex justify-content-center align-items-center m-5 ">
+    <div class="col-6 g-5">
+      <img src="{{car.CarImage.url}}" class="card-img-top" alt="Image of {{ car.Carname }}" />
+    </div>
+    <div class="col-6 g-5">
+      <h5>CarName: {{car.Carname }}</h5>
+      <p>CarPrice: ${{car.carPrice }}</p>
+      <p>CarBrand: {{car.brand.brand_name }}</p>
+      <p>Quantity: {{car.quantity}}</p>
+      <p>CarDescription: {{ car.CarDescription}}</p>
+      <a href="{% url 'buy_car' car.id %}" class="btn btn-primary">Buy Now</a>
+    </div>
+    </div>
+    
+         <h5 class="px-5">Total Comments: {{Comments|length}}</h5>
+      
+        {% for comment in Comments%}
+        <div class="card m-2 bg-light">
+         <div class="body px-5">
+         <p>{{comment.name}}</h3>
+         <p>{{comment.email}}</h3>
+         <p> Coment: {{comment.commentText}}  Created_At:   {{comment.created_at}}</h3>
+         </div>
+        </div>
+        {%endfor%}
+    
+    <form
+    method="POST"
+    style="width: 50%;"
+    class="p-5"
+    novalidate
+  >
+    {% csrf_token %} {{ form|crispy}}
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+ </div>
+
+{% endblock %}
+
